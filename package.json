@@ -1,16 +1,16 @@
 {
   "name": "bun-discamp",
-  "module": "index.ts",
-  "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "babel-plugin-styled-components": "^2.1.4"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "scripts": {
     "clean": "rm -rf dist && echo 'Done.'",
-    "dev": "bun --hot index.tsx"
+    "dev": "bun --hot server/index.tsx",
+    "build": "bun run build.tsx"
   },
   "dependencies": {
     "react": "^18.2.0",

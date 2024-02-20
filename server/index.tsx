@@ -1,11 +1,11 @@
-import {App} from "./main";
+import {App} from "../client/app.tsx";
 import {renderToReadableStream} from "react-dom/server";
 
 const buildsMatchers = new Map<string, () => Response>();
 
 const init = async () => {
   const builds = await Bun.build({
-    entrypoints: ['./hydrate.tsx'],
+    entrypoints: ['./client/hydrate.tsx'],
     target: "browser",
     splitting: true,
     minify: {
@@ -25,9 +25,7 @@ const init = async () => {
 
 const serveBuild = (req: Request) => {
   const {pathname} = new URL(req.url);
-
   const buildFileRequest = buildsMatchers.get(pathname);
-
   if (buildFileRequest) {
     return buildFileRequest();
   }
@@ -43,7 +41,7 @@ const server = Bun.serve({
       return buildFileRequest;
     }
     const stream = await renderToReadableStream(<App/>, {
-      bootstrapScripts: ['./hydrate.js']
+      bootstrapScripts: ['/hydrate.js']
     });
     return new Response(stream, {
       headers: {'Content-Type': 'text/html; charset=utf-8'}
@@ -51,4 +49,4 @@ const server = Bun.serve({
   },
 });
 
-console.log(`Listening on ${server.hostname}:${server.port}`);
+console.log(`Listening on http://${server.hostname}:${server.port}`);

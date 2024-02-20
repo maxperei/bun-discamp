@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {ReleaseList} from "./app";
+import {Root} from './components/root'
 
 export const App = () => {
   return (
@@ -7,10 +6,10 @@ export const App = () => {
     <head>
       <meta charSet="utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <title>App</title>
+      <title>bun-discamp</title>
     </head>
     <body>
-    <ReleaseList/>
+    <Root/>
     </body>
     </html>
   );
