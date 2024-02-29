@@ -3,6 +3,8 @@ import {useFetch} from '../../services/fetch'
 import {Album, Release} from '../release'
 import {Loading} from '../loader'
 import {Main, Select, Grid, Menu, Li} from './styles'
+import {SpeedInsights} from '@vercel/speed-insights/react';
+import {Analytics} from "@vercel/analytics/react";
 
 export const Root = () => {
   const {data, error, loading, refetch} = useFetch()
@@ -29,6 +31,8 @@ export const Root = () => {
             </Main>
         )
       }
+      <SpeedInsights debug={false}/>
+      <Analytics mode={'production'} debug={false}/>
     </>
   )
 }
